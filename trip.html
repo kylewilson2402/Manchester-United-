@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Trip to Old Trafford — Manchester United</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,600;0,700;1,300&family=Lora:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/styles3.css" />
+  <style>
+    .trip-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .trip-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      animation: slowZoom 18s ease-out forwards;
+    }
+    @keyframes slowZoom {
+      from { transform: scale(1.06); }
+      to   { transform: scale(1.0);  }
+    }
+    .trip-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13,13,13,0.05) 0%, rgba(13,13,13,0.25) 40%, rgba(13,13,13,0.93) 100%);
+    }
+    .trip-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px 64px;
+      max-width: 900px;
+      animation: fadeUp 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+    .trip-stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--f-sub);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    .trip-stamp::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .trip-hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      line-height: 0.88;
+      color: var(--white);
+      letter-spacing: 0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .trip-hero h1 .red   { color: var(--red); }
+    .trip-hero h1 .ghost { display: block; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,0.3); }
+    .trip-hero-desc {
+      font-family: var(--f-body);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      line-height: 1.75;
+    }
+
+    /* Stats bar */
+    .trip-stat-bar {
+      background: var(--red);
+      padding: 1.25rem 48px;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+    .trip-stat { flex: 1; max-width: 220px; text-align: center; padding: 0 2rem; border-right: 1px solid rgba(255,255,255,0.2); }
+    .trip-stat:last-child { border-right: none; }
+    .trip-stat-num { font-family: var(--f-display); font-size: 2.6rem; color: var(--white); line-height: 1; }
+    .trip-stat-label { font-family: var(--f-sub); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-top: 0.25rem; }
+
+    /* Story */
+    .trip-story {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 6rem;
+      align-items: center;
+      padding: 7rem 48px;
+      max-width: 1300px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--line);
+    }
+    .trip-story-text p { font-size: 0.97rem; line-height: 1.9; color: rgba(240,237,230,0.68); margin-bottom: 1.1rem; }
+    .trip-story-text p:first-of-type { font-style: italic; font-size: 1.08rem; color: var(--cream); }
+    .trip-photo-wrap { position: relative; }
+    .trip-photo-main { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; display: block; }
+    .trip-photo-badge {
+      position: absolute; top: 20px; right: 20px;
+      font-family: var(--f-sub); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      background: var(--red); color: var(--white); padding: 6px 12px;
+    }
+    .trip-photo-accent {
+      position: absolute; bottom: -30px; left: -30px;
+      width: 52%; aspect-ratio: 4/3; object-fit: cover;
+      border: 4px solid var(--black); box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+
+    /* Video */
+    .trip-video-section { padding: 7rem 48px; max-width: 1300px; margin: 0 auto; border-bottom: 1px solid var(--line); }
+    .trip-video-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; gap: 2rem; flex-wrap: wrap; }
+    .trip-video-header .section-title { margin-bottom: 0; font-size: clamp(2rem,4vw,3.5rem); }
+    .trip-video-note { font-family: var(--f-body); font-style: italic; font-size: 0.9rem; color: rgba(240,237,230,0.5); max-width: 300px; text-align: right; }
+    .trip-video-wrap { position: relative; background: #000; overflow: hidden; }
+    .trip-video-wrap video { width: 100%; display: block; max-height: 70vh; object-fit: cover; }
+    .video-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(13,13,13,0.4); cursor: pointer; transition: opacity 0.3s; }
+    .video-overlay.hidden { opacity: 0; pointer-events: none; }
+    .play-btn { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--white); display: flex; align-items: center; justify-content: center; transition: background 0.25s, border-color 0.25s, transform 0.25s; }
+    .video-overlay:hover .play-btn { background: var(--red); border-color: var(--red); transform: scale(1.08); }
+    .play-btn svg { width: 28px; height: 28px; fill: var(--white); margin-left: 4px; }
+    .video-caption { font-family: var(--f-sub); font-size: 0.65rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 0.75rem; }
+
+    /* Gallery */
+    .trip-gallery-section { padding: 7rem 48px; max-width: 1300px; margin: 0 auto; border-bottom: 1px solid var(--line); }
+    .gallery-grid { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto; gap: 6px; margin-top: 3rem; }
+    .gallery-item { overflow: hidden; position: relative; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); filter: saturate(0.9); }
+    .gallery-item:hover img { transform: scale(1.04); filter: saturate(1); }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.tall img { aspect-ratio: 2/3; }
+    .gallery-item:not(.tall) img { aspect-ratio: 16/9; }
+    .gallery-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 1.25rem 1rem; background: linear-gradient(0deg, rgba(13,13,13,0.85), transparent); font-family: var(--f-sub); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.7); opacity: 0; transform: translateY(4px); transition: opacity 0.3s, transform 0.3s; }
+    .gallery-item:hover .gallery-label { opacity: 1; transform: translateY(0); }
+
+    /* Quote */
+    .trip-atmosphere { background: var(--charcoal); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 6rem 48px; text-align: center; position: relative; overflow: hidden; }
+    .trip-atmosphere::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(218,41,28,0.1), transparent 70%); pointer-events: none; }
+    .trip-atmosphere blockquote { position: relative; max-width: 720px; margin: 0 auto; }
+    .trip-atmosphere blockquote::before { content: '\201C'; font-family: var(--f-display); font-size: 10rem; color: var(--red); opacity: 0.25; line-height: 0; position: absolute; top: 2rem; left: -2rem; }
+    .trip-atmosphere blockquote p { font-family: var(--f-body); font-style: italic; font-size: clamp(1.3rem, 2.8vw, 2rem); color: var(--cream); line-height: 1.55; margin-bottom: 1.75rem; }
+    .trip-atmosphere cite { font-family: var(--f-sub); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+
+    /* Continue links */
+    .trip-continue { max-width: 1300px; margin: 0 auto; padding: 4rem 48px 5rem; border-top: 1px solid var(--line); }
+    .trip-link-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn-outline { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--f-sub); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(251,225,34,0.3); padding: 1rem 2rem; transition: all 0.3s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--white); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .trip-story, .trip-video-section, .trip-gallery-section, .trip-continue { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .trip-story { grid-template-columns: 1fr; gap: 3rem; }
+      .trip-photo-accent { display: none; }
+      .trip-hero-content { padding: 0 1.5rem 4rem; }
+      .trip-stat-bar { padding: 1.25rem 1.5rem; flex-wrap: wrap; }
+      .trip-atmosphere { padding: 5rem 1.5rem; }
+      .trip-video-note { text-align: left; }
+    }
+    @media (max-width: 768px) {
+      .trip-hero-content { padding: 0 1.25rem 3rem; }
+      .trip-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.18); padding: 0.75rem 0; min-width: 130px; }
+      .trip-stat:last-child { border-bottom: none; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.tall { grid-row: span 1; }
+      .gallery-item.tall img { aspect-ratio: 16/9; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">MAN <span>UTD</span></a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="history.html">History</a></li>
+          <li><a href="legends.html">Legends</a></li>
+          <li><a href="trophies.html">Trophies</a></li>
+          <li><a href="tactics.html">Tactics</a></li>
+          <li><a href="trip.html">My Trip</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="trip-hero" aria-labelledby="trip-heading">
+      <img class="trip-hero-img" src="images/trip_stadium_outside.jpg" alt="Old Trafford exterior showing the Manchester United sign on match day" />
+      <div class="trip-hero-overlay"></div>
+      <div class="trip-hero-content">
+        <p class="trip-stamp">Old Trafford &nbsp;&middot;&nbsp; Manchester, England</p>
+        <h1 id="trip-heading">
+          <span class="ghost">I Was</span>
+          <span class="red">There.</span>
+        </h1>
+        <p class="trip-hero-desc">
+          Standing outside Old Trafford. Walking through those gates.
+          Hearing 74,000 people sing together. This is what it actually feels
+          like to be a Manchester United supporter.
+        </p>
+      </div>
+    </section>
+
+    <div class="trip-stat-bar" role="complementary" aria-label="Trip facts">
+      <div class="trip-stat">
+        <div class="trip-stat-num">74K</div>
+        <div class="trip-stat-label">Crowd at Old Trafford</div>
+      </div>
+      <div class="trip-stat">
+        <div class="trip-stat-num">1</div>
+        <div class="trip-stat-label">Lifetime Dream Ticked Off</div>
+      </div>
+      <div class="trip-stat">
+        <div class="trip-stat-num">1878</div>
+        <div class="trip-stat-label">Year the Club Was Founded</div>
+      </div>
+      <div class="trip-stat">
+        <div class="trip-stat-num">&#x221E;</div>
+        <div class="trip-stat-label">Memories Made</div>
+      </div>
+    </div>
+
+    <div class="trip-story reveal">
+
+      <div class="trip-story-text">
+        <p class="section-eyebrow">The Experience</p>
+        <h2 class="section-title">The Theatre<br />of <em>Dreams</em></h2>
+
+        <p>
+          Every Manchester United supporter has a dream. You want to actually stand inside Old Trafford,
+          feel the noise hit you, and be surrounded by people who love this club as much as you do.
+          I got to do that. And honestly it was everything.
+        </p>
+        <p>
+          Walking up to the ground for the first time and seeing that Manchester United sign in red
+          above the stands felt like something out of a film. The stadium has this real weight to it
+          before you even step inside. It looks exactly like the pictures but so much bigger in real life.
+        </p>
+        <p>
+          Inside it was loud from the first minute. Red and black everywhere you looked.
+          The Stretford End was going from the opening whistle and that energy just spread
+          through the whole ground. Looking out across that pitch with 74,000 people around you
+          is something I will honestly never forget.
+        </p>
+        <p>
+          This trip changed how I think about the club. Old Trafford is not just a stadium.
+          It is a place where the history of the game actually lives and breathes.
+        </p>
+      </div>
+
+      <div class="trip-photo-wrap reveal reveal-delay-2">
+        <img class="trip-photo-main" src="images/trip_stadium_inside.jpg" alt="Thousands of Manchester United fans with hands raised inside Old Trafford as players warm up on the pitch" />
+        <img class="trip-photo-accent" src="images/trip_stadium_outside.jpg" alt="Old Trafford exterior with the Manchester United sign above the ground" />
+        <div class="trip-photo-badge">Old Trafford &nbsp;&middot;&nbsp; Match Day</div>
+      </div>
+
+    </div>
+
+    <section class="trip-video-section reveal" aria-labelledby="video-heading">
+      <div class="trip-video-header">
+        <div>
+          <p class="section-eyebrow">Match Day Footage</p>
+          <h2 class="section-title" id="video-heading">You Had to<br /><em>Be There</em></h2>
+        </div>
+        <p class="trip-video-note">Raw footage from inside Old Trafford. The crowd, the noise and the atmosphere captured live on the day.</p>
+      </div>
+
+      <div class="trip-video-wrap" id="videoWrap">
+        <video id="tripVideo" src="images/trip_video.mp4" preload="metadata" playsinline aria-label="Video footage from inside Old Trafford on match day"></video>
+        <div class="video-overlay" id="videoOverlay" role="button" aria-label="Play video" tabindex="0">
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+      </div>
+      <p class="video-caption">Inside Old Trafford &nbsp;&middot;&nbsp; Match day &nbsp;&middot;&nbsp; Manchester, England</p>
+    </section>
+
+    <section class="trip-gallery-section reveal" aria-labelledby="gallery-heading">
+      <p class="section-eyebrow">Photography</p>
+      <h2 class="section-title" id="gallery-heading">Shots From<br /><em>the Ground</em></h2>
+
+      <div class="gallery-grid">
+        <div class="gallery-item tall">
+          <img src="images/trip_stadium_inside.jpg" alt="Thousands of fans cheering with hands raised inside Old Trafford with the pitch stretching out ahead" />
+          <p class="gallery-label">Inside Old Trafford &nbsp;&middot;&nbsp; The Stretford End</p>
+        </div>
+        <div class="gallery-item">
+          <img src="images/trip_stadium_outside.jpg" alt="Old Trafford exterior with the Manchester United sign above the Snapdragon advertisement on match day" />
+          <p class="gallery-label">Old Trafford Exterior &nbsp;&middot;&nbsp; Match Day</p>
+        </div>
+        <div class="gallery-item">
+          <img src="images/trip_stadium_outside.jpg" alt="The Manchester United lettering above the Sir Alex Ferguson Stand" style="object-position: center 20%;" />
+          <p class="gallery-label">Sir Alex Ferguson Stand &nbsp;&middot;&nbsp; The Theatre of Dreams</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="trip-atmosphere">
+      <blockquote>
+        <p>
+          Old Trafford is a very intimidating place to watch a game.
+          The fans, the history, the atmosphere. It is the greatest
+          stadium in the world.
+        </p>
+        <cite>The feeling every supporter gets when they walk through those gates</cite>
+      </blockquote>
+    </div>
+
+    <div class="trip-continue">
+      <p class="section-eyebrow">Continue Exploring</p>
+      <div class="trip-link-row">
+        <a href="history.html" class="btn-primary">
+          <span class="btn-label">Club History</span>
+          <span class="btn-arrow">&#8594;</span>
+        </a>
+        <a href="legends.html" class="btn-outline">The Legends &#8594;</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-logo">MAN UTD</div>
+    <p>
+      <a href="index.html">Home</a> &nbsp;&middot;&nbsp;
+      <a href="history.html">History</a> &nbsp;&middot;&nbsp;
+      <a href="legends.html">Legends</a> &nbsp;&middot;&nbsp;
+      <a href="trophies.html">Trophies</a> &nbsp;&middot;&nbsp;
+      <a href="tactics.html">Tactics</a> &nbsp;&middot;&nbsp;
+      <a href="trip.html">My Trip</a> &nbsp;&middot;&nbsp;
+      <a href="about.html">About</a>
+    </p>
+    <p style="margin-top:0.75rem;">MMP 240 Midterm &nbsp;&middot;&nbsp; BMCC</p>
+  </footer>
+
+  
+
+  <script src="js/nav.js"></script>
+  <script>
+    var video   = document.getElementById('tripVideo');
+    var overlay = document.getElementById('videoOverlay');
+    function togglePlay() {
+      if (video.paused) { video.play(); overlay.classList.add('hidden'); }
+      else              { video.pause(); overlay.classList.remove('hidden'); }
+    }
+    overlay.addEventListener('click', togglePlay);
+    overlay.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') togglePlay(); });
+    video.addEventListener('ended', function() { overlay.classList.remove('hidden'); });
+    video.addEventListener('click', togglePlay);
+  </script>
+</body>
+</html>
